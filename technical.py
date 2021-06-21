@@ -9,18 +9,11 @@ import sys
 startTime = time.time()
 
 #Init Variables
-inputDirectory = '/tmp/blablacar/input/'
+inputDirectory = '/tmp/blablacar/input'
 inputFile = 'echantillon.csv'
-outputDirectory = '/tmp/blablacar/output/'
+outputDirectory = '/tmp/blablacar/output'
 numHeaders = 5
-""" workingDate = ''
-try:
-    workingDate = sys.argv[1]
-except ValueError:
-    print(ValueError)
 
-
- """
 #Check if date in argument, if not treat all the dates
 if len(sys.argv) > 1:
     print('There is an argument')
@@ -37,7 +30,7 @@ factExchangeRateHistoryOutputFile = 'fact_exchange_rate_history.csv'
 params_headers = ['Titre', 'CodeSerie', 'Unite', 'Magnitude', 'MethodeObservation']
 
 #Read file source
-df = pd.read_csv(inputDirectory + inputFile, sep=';', header=None)
+df = pd.read_csv(inputDirectory + '/' + inputFile, sep=';', header=None)
 
 #Get Parameter DataFrame from raw DataFrame
 def get_params_df(df):
@@ -206,14 +199,12 @@ else:
     workingDate_date = date.today()
 bucket_folder = workingDate_date.strftime("%Y/%m/%d")
 
-#Create ouput directory if not exists
-""" outputBucket = Path(outputDirectory + '/' + bucket_folder)
-outputBucket.mkdir(parents=True, exist_ok=True)
- """
-
 outputBucket = outputDirectory + '/' + str(bucket_folder)
 if not os.path.exists(outputBucket):
     os.mkdir(outputBucket)
+
+print(outputBucket)
+print('outputBucket')
 
 #Store results dataFrames in files 
 dim_currency_df.to_csv(outputBucket + '/' + dimCurrencyOutputFile, index=False, quoting=csv.QUOTE_NONNUMERIC)
