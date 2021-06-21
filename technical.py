@@ -16,7 +16,6 @@ numHeaders = 5
 
 #Check if date in argument, if not treat all the dates
 if len(sys.argv) > 1:
-    print('There is an argument')
     workingDate = sys.argv[1]
     if not workingDate:
         workingDate = ''
@@ -25,6 +24,7 @@ else:
 
 print('workingDate')
 print(workingDate)
+
 dimCurrencyOutputFile = 'dim_currency.csv'
 factExchangeRateHistoryOutputFile = 'fact_exchange_rate_history.csv'
 params_headers = ['Titre', 'CodeSerie', 'Unite', 'Magnitude', 'MethodeObservation']
@@ -60,7 +60,6 @@ data = df[numHeaders+1:]
 
 #Get only data from date in argument if specified
 if workingDate:
-    print('there is a workingDate')
     data = data.loc[data[0] == workingDate]
 
 # End script if no data recovered
@@ -200,11 +199,12 @@ else:
 bucket_folder = workingDate_date.strftime("%Y/%m/%d")
 
 outputBucket = outputDirectory + '/' + str(bucket_folder)
-if not os.path.exists(outputBucket):
-    os.mkdir(outputBucket)
 
-print(outputBucket)
+if not os.path.exists(outputBucket):
+    os.makedirs(outputBucket)
+
 print('outputBucket')
+print(outputBucket)
 
 #Store results dataFrames in files 
 dim_currency_df.to_csv(outputBucket + '/' + dimCurrencyOutputFile, index=False, quoting=csv.QUOTE_NONNUMERIC)
