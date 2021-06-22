@@ -16,7 +16,6 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentialsFile
 
 toProcessDirectory = r'/tmp/blablacar/output'
 processedDirectory = r'/tmp/blablacar/processedFiles'
-#gcsBucket = 'blabladwh'
 gcsBucket = 'yca_datalake'
 
 if not os.path.exists(processedDirectory):
