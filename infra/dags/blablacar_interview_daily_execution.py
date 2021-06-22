@@ -13,11 +13,17 @@ default_args = {
     'retry_delay': timedelta(minutes=15),
   }
 
-dag = DAG('blablacar_interview', default_args=default_args)
+dag = DAG('blablacar_interview_daily_execution', default_args=default_args)
 
 
 t1 = BashOperator(
-    task_id='run_script',
-    bash_command='python /opt/airflow/scripts/technical.py {{ macros.ds_format(ds, "%Y-%m-%d", "%d/%m/%Y") }}',
+    task_id='run_processData',
+    bash_command='python /opt/airflow/scripts/processData.py {{ macros.ds_format(ds, "%Y-%m-%d", "%d/%m/%Y") }}',
     dag=dag)
 
+t2 = BashOperator(
+    task_id='run_upload_to_gcp',
+    bash_command='python /opt/airflow/scripts/upload_to_gcp.py /tmp/credentials.json',
+    dag=dag)
+
+t1 >> t2
