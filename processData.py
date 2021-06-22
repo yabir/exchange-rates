@@ -22,7 +22,7 @@ else:
 print('workingDate: %s' % workingDate)
 
 dimCurrencyOutputFile = 'dim_currency.csv'
-factExchangeRateHistoryOutputFile = 'fact_exchange_rate_history_df.csv'
+factExchangeRateHistoryOutputFile = 'fact_exchange_rate_history.csv'
 params_headers = ['Titre', 'CodeSerie', 'Unite', 'Magnitude', 'MethodeObservation']
 
 #Read file source

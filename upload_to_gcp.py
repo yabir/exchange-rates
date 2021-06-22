@@ -16,7 +16,8 @@ os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentialsFile
 
 toProcessDirectory = r'/tmp/blablacar/output'
 processedDirectory = r'/tmp/blablacar/processedFiles'
-gcsBucket = 'blabladwh'
+#gcsBucket = 'blabladwh'
+gcsBucket = 'yca_datalake'
 
 if not os.path.exists(processedDirectory):
     os.makedirs(processedDirectory)
@@ -30,12 +31,13 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 for filename in os.listdir(toProcessDirectory):
     fromFilePath = os.path.join(toProcessDirectory, filename)
     toFilePath = os.path.join(processedDirectory, filename)
-    print('fromFilePath %s' % fromFilePath)
-    print('toFilePath %s' % toFilePath)
     print('Starting process for file %s ...' % filename)
-    #Upload file to GCS
-    upload_blob(gcsBucket, str(fromFilePath), str(filename))
-    #Move files to processed Directory
-    os.rename(fromFilePath, toFilePath)
-    print('File %s uploaded to bucket %s' % (filename, gcsBucket))
+    try:
+        #Upload file to GCS
+        upload_blob(gcsBucket, str(fromFilePath), str(filename))
+        #Move files to processed Directory
+        os.rename(fromFilePath, toFilePath)
+        print('File %s uploaded to bucket %s' % (filename, gcsBucket))
+    except ValueError:
+        print(ValueError)
 
