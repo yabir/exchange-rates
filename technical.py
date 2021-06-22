@@ -196,17 +196,14 @@ if workingDate:
     workingDate_date = datetime.strptime(workingDate, '%d/%m/%Y')
 else:
     workingDate_date = date.today()
-bucket_folder = workingDate_date.strftime("%Y/%m/%d")
+bucket_object_prefix = workingDate_date.strftime("%Y_%m_%d_")
 
-outputBucket = outputDirectory + '/' + str(bucket_folder)
-
-if not os.path.exists(outputBucket):
-    os.makedirs(outputBucket)
+outputBucket = outputDirectory + '/' + str(bucket_object_prefix)
 
 print('outputBucket')
 print(outputBucket)
 
 #Store results dataFrames in files 
-dim_currency_df.to_csv(outputBucket + '/' + dimCurrencyOutputFile, index=False, quoting=csv.QUOTE_NONNUMERIC)
-fact_exchange_rate_history.to_csv(outputBucket + '/' + factExchangeRateHistoryOutputFile, index=False, quoting=csv.QUOTE_NONNUMERIC)
+dim_currency_df.to_csv(outputBucket + dimCurrencyOutputFile, index=False, header=False, quoting=csv.QUOTE_NONNUMERIC)
+fact_exchange_rate_history.to_csv(outputBucket + factExchangeRateHistoryOutputFile, index=False, header=False, quoting=csv.QUOTE_NONNUMERIC)
 
