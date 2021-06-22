@@ -14,7 +14,7 @@ For the Data modeling test :
 - The database can be accesed in the postgres database with localhost:5432 (schemas : operations and analysis)
 
 For the Technical test :
-- Airflow can be accesed in localhost:8081
+- Airflow can be accesed in localhost:8081 (user and pass: airflow)
 - Python scripts are in the mounted directory infra/scripts
 
 For tables in bigquery:

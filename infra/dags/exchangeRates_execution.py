@@ -13,7 +13,7 @@ default_args = {
     'retry_delay': timedelta(minutes=15),
   }
 
-dag = DAG('blablacar_interview_daily_execution', default_args=default_args)
+dag = DAG('exchangeRates_execution', default_args=default_args)
 
 t1 = BashOperator(
     task_id='run_processData',

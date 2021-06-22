@@ -18,8 +18,17 @@ toProcessDirectory = r'/opt/airflow/tmp/output'
 processedDirectory = r'/opt/airflow/tmp/processedFiles'
 gcsBucket = 'yca_datalake'
 
+if not os.path.exists(toProcessDirectory):
+    print('Input directory does not exists')
+    quit()
+
 if not os.path.exists(processedDirectory):
-    os.makedirs(processedDirectory)
+    os.makedirs(processedDirectory, mode=0o777, exist_ok=True)
+    """ try:
+        original_umask = os.umask(0)
+        os.makedirs(processedDirectory, mode=0o777, exist_ok=True)
+    finally:
+        os.umask(original_umask) """
 
 def upload_blob(bucket_name, source_file_name, destination_blob_name):
     storage_client = storage.Client()

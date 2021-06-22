@@ -20,7 +20,6 @@ x-airflow-common:
     - ./scripts:/opt/airflow/scripts
     - ./auth/credentials.json:/tmp/credentials.json
     - ./data:/tmp/blablacar/input 
-    - ./tmp:/opt/airflow/tmp/output 
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
   depends_on:
     redis:
@@ -78,6 +77,9 @@ services:
 
   airflow-worker:
     <<: *airflow-common
+    build:
+      context: ./
+      dockerfile: worker.Dockerfile
     command: celery worker
     healthcheck:
       test:
