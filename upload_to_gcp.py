@@ -1,9 +1,18 @@
 #from gcloud import storage
 from google.cloud import storage
-from oauth2client.service_account import ServiceAccountCredentials
 import os 
+import sys
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/tmp/corded-keel-317515-5294400fe510.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="/tmp/corded-keel-317515-5294400fe510.json"
+
+#Check if credentials in argument, if not quit program
+if len(sys.argv) > 1 and sys.argv[1]:
+    credentialsFile = sys.argv[1]
+else:
+    print('No credentials were provided')
+    quit()
+
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = credentialsFile
 
 toProcessDirectory = r'/tmp/blablacar/output'
 processedDirectory = r'/tmp/blablacar/processedFiles'
