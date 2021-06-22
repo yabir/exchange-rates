@@ -15,7 +15,6 @@ default_args = {
 
 dag = DAG('blablacar_interview_daily_execution', default_args=default_args)
 
-
 t1 = BashOperator(
     task_id='run_processData',
     bash_command='python /opt/airflow/scripts/processData.py {{ macros.ds_format(ds, "%Y-%m-%d", "%d/%m/%Y") }}',
