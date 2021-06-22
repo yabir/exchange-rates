@@ -4,6 +4,7 @@ import time
 from datetime import date, datetime
 import sys
 import numpy as np
+import os
 
 startTime = time.time()
 
@@ -202,19 +203,22 @@ else:
     workingDate_date = date.today()
 bucket_object_prefix = workingDate_date.strftime("%Y_%m_%d_")
 
-outputBucket = outputDirectory + '/' + str(bucket_object_prefix)
+if not os.path.exists(outputDirectory):
+    os.makedirs(outputDirectory, mode=0o777, exist_ok=True)
+
+bucketFileStart = outputDirectory + '/' + str(bucket_object_prefix)
 
 #print('outputBucket')
 #print(outputBucket)
 
 #Store results dataFrames in files 
 if (rows_dim_currency_df > 0):
-    dim_currency_df.to_csv(outputBucket + dimCurrencyOutputFile, index=False, header=False, quoting=csv.QUOTE_NONNUMERIC)
+    dim_currency_df.to_csv(bucketFileStart + dimCurrencyOutputFile, index=False, header=False, quoting=csv.QUOTE_NONNUMERIC)
 else:
     print('No rows in resulting dataFrame: dim_currency_df')
 
 if (rows_fact_exchange_rate_history_df > 0):
-    fact_exchange_rate_history_df.to_csv(outputBucket + factExchangeRateHistoryOutputFile, index=False, header=False, quoting=csv.QUOTE_NONNUMERIC)
+    fact_exchange_rate_history_df.to_csv(bucketFileStart + factExchangeRateHistoryOutputFile, index=False, header=False, quoting=csv.QUOTE_NONNUMERIC)
 else:
     print('No rows in resulting dataFrame: rows_fact_exchange_rate_history_df')
 
