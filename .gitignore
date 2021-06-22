@@ -1,5 +1,5 @@
 #auth
-/home/yabir/exchange-rates/infra/auth/credentials.json
+infra/auth/credentials.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
