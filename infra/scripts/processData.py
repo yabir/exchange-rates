@@ -10,7 +10,7 @@ startTime = time.time()
 #Init Variables
 inputDirectory = '/tmp/blablacar/input'
 inputFile = 'echantillon.csv'
-outputDirectory = '/tmp/blablacar/output'
+outputDirectory = '/opt/airflow/tmp/output'
 numHeaders = 5
 
 #Check if date in argument, if not treat all the dates

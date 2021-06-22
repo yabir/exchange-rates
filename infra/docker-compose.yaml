@@ -19,7 +19,8 @@ x-airflow-common:
     - ./plugins:/opt/airflow/plugins
     - ./scripts:/opt/airflow/scripts
     - ./auth/credentials.json:/tmp/credentials.json
-    - ./data:/tmp/blablacar/input  
+    - ./data:/tmp/blablacar/input 
+    - ./tmp:/opt/airflow/tmp/output 
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
   depends_on:
     redis:
