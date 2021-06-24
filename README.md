@@ -24,8 +24,8 @@ For tables in bigquery:
 
 || raw_dim_currency | fact_exchange_rate_history |
 | ------ | ------ | ------ |
-|Data|yca_datalake/*_ dim_currency.csv|cur_code: string, one_euro_value: float, updated_date: date, serial_code: string|
-|Schema|yca_datalake/*_fact_exchange_rate_history.csv|history_date:date,from_cur_code:string,to_cur_code:string,exchange_rate:float|
+|Data|yca_datalake/*_dim_currency.csv|yca_datalake/*_fact_exchange_rate_history.csv|
+|Schema|cur_code: string, one_euro_value: float, updated_date: date, serial_code: string|history_date:date,from_cur_code:string,to_cur_code:string,exchange_rate:float|
 
 
 Create the following query and save it as the view 'dim_currency' :
